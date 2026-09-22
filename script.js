@@ -19,11 +19,19 @@ let gibberish = bogstaver.join("");
 
 console.log(gibberish);
 
+//viser hvor mange gane spilleren har førsøgt.
+let forsøg = 0;
+
 //spilleren skal nu gætte ordet.
 let gættetOrd = prompt(`Gæt ordet: ${gibberish}`);
+forsøg++;
 
+//spilleren skal gætte ordet, hvis det er forkert, skal de prøve igen.
+while (gættetOrd.toLowerCase() !== randomOrd.toLowerCase()) {
+  gættetOrd = prompt(`Forkert! Prøv igen: ${gibberish}`);
+  forsøg++;
+}
+//hvis rigtig så har spillerne vundet, ellers fortsætter spillet via "while" loopet
 if (gættetOrd.toLowerCase() === randomOrd.toLowerCase()) {
-  alert("Tillykke! Du gættede ordet!");
-} else {
-  alert(`Desværre, det rigtige ord var: ${randomOrd}`);
+  alert(`Tillykke! Du gættede ordet! forsøg brugt ${forsøg}`);
 }
