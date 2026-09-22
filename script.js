@@ -3,6 +3,7 @@ const giveUp = document.getElementById("giveUp");
 const guessInput = document.getElementById("guessInput");
 const guessButton = document.getElementById("guessButton");
 const correctWord = document.getElementById("correctWord");
+const attempts = document.getElementById("attempts");
 
 //array med ord til spillet
 const ord = [
@@ -31,17 +32,28 @@ guessButton.addEventListener("click", () => {
   let gættetOrd = guessInput.value;
 });
 
-//viser hvor mange gane spilleren har førsøgt.
+//viser hvor mange forsøg spillerne har og hvor mange gange de har førsøgt.
 let forsøg = 0;
+let maxForsøg = 5;
 
 guessButton.addEventListener("click", () => {
   let gættetOrd = guessInput.value;
   forsøg++;
 
+  attempts.textContent = `Forsøg: ${forsøg}`;
+
   if (gættetOrd.trim().toLowerCase() === randomOrd.toLowerCase()) {
     correctWord.textContent = `Rigtigt! Forsøg brugt ${forsøg}`;
   } else {
-    correctWord.textContent = "Forkert! Prøv igen.";
+    if (forsøg >= maxForsøg) {
+      correctWord.textContent = `Du løb tør for forsøg! Ordet var: ${randomOrd}`;
+    } else {
+      correctWord.textContent = "Forkert! Prøv igen.";
+    }
+    if (forsøg >= maxForsøg) {
+      correctWord.textContent = `Du løb tør for forsøg! Ordet var: ${randomOrd}`;
+      guessButton.disabled = true;
+    }
   }
 });
 
