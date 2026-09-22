@@ -27,13 +27,25 @@ let maxForsøg = 5;
 
 // starter et nyt spil og blander det valgte ord
 function startGame() {
-  randomOrd = ord[Math.floor(Math.random() * ord.length)];
+  console.log("ord-array:", ord);
+
+  let indeks = Math.floor(Math.random() * ord.length);
+
+  randomOrd = ord[indeks];
+
+  console.log(`ord[${indeks}] → "${randomOrd}"`);
 
   let bogstaver = randomOrd.split("");
 
+  console.log(`split("") →`, bogstaver);
+
   bogstaver.sort(() => Math.random() - 0.5);
 
+  console.log(`sort() →`, bogstaver);
+
   let gibberish = bogstaver.join("");
+
+  console.log(`join("") → "${gibberish}"`);
 
   gibberishElement.textContent = gibberish;
 
@@ -45,7 +57,7 @@ function startGame() {
   guessButton.disabled = false;
   giveUp.disabled = false;
 
-  console.log(`Nyt spil startet. Ordet er: ${randomOrd}`);
+  console.log("Forsøg nulstillet til 0");
 }
 
 // afslutter spillet
@@ -58,8 +70,6 @@ function endGame() {
 guessButton.addEventListener("click", () => {
   let gættetOrd = guessInput.value;
 
-  console.log(`Spilleren gættede: ${gættetOrd}`);
-
   guessInput.value = "";
 
   forsøg++;
@@ -71,7 +81,6 @@ guessButton.addEventListener("click", () => {
     endGame();
   } else if (forsøg >= maxForsøg) {
     correctWord.textContent = `Du løb tør for forsøg! Ordet var: ${randomOrd}`;
-    console.log("Spilleren løb tør for forsøg.");
     endGame();
   } else {
     correctWord.textContent = "Forkert! Prøv igen.";
@@ -81,8 +90,6 @@ guessButton.addEventListener("click", () => {
 // spilleren giver op
 giveUp.addEventListener("click", () => {
   correctWord.textContent = `Du gav op! Ordet var: ${randomOrd}`;
-
-  console.log(`Spilleren gav op. Ordet var: ${randomOrd}`);
 
   endGame();
 });
