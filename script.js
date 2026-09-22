@@ -1,3 +1,9 @@
+// de forskellige knapper på siden.
+const giveUp = document.getElementById("giveUp");
+const guessInput = document.getElementById("guessInput");
+const guessButton = document.getElementById("guessButton");
+const correctWord = document.getElementById("correctWord");
+
 //array med ord til spillet
 const ord = [
   "Games",
@@ -19,19 +25,27 @@ let gibberish = bogstaver.join("");
 
 console.log(gibberish);
 
+document.getElementById("gibberish").textContent = gibberish;
+
+guessButton.addEventListener("click", () => {
+  let gættetOrd = guessInput.value;
+});
+
 //viser hvor mange gane spilleren har førsøgt.
 let forsøg = 0;
 
-//spilleren skal nu gætte ordet.
-let gættetOrd = prompt(`Gæt ordet: ${gibberish}`);
-forsøg++;
-
-//spilleren skal gætte ordet, hvis det er forkert, skal de prøve igen.
-while (gættetOrd.toLowerCase() !== randomOrd.toLowerCase()) {
-  gættetOrd = prompt(`Forkert! Prøv igen: ${gibberish}`);
+guessButton.addEventListener("click", () => {
+  let gættetOrd = guessInput.value;
   forsøg++;
-}
-//hvis rigtig så har spillerne vundet, ellers fortsætter spillet via "while" loopet
-if (gættetOrd.toLowerCase() === randomOrd.toLowerCase()) {
-  alert(`Tillykke! Du gættede ordet! forsøg brugt ${forsøg}`);
-}
+
+  if (gættetOrd.trim().toLowerCase() === randomOrd.toLowerCase()) {
+    correctWord.textContent = `Rigtigt! Forsøg brugt ${forsøg}`;
+  } else {
+    correctWord.textContent = "Forkert! Prøv igen.";
+  }
+});
+
+//spilleren trykker på knapper for at give op
+giveUp.addEventListener("click", () => {
+  correctWord.textContent = `Du gav op! Ordet var: ${randomOrd}`;
+});
