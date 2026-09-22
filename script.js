@@ -22,6 +22,8 @@ const ord = [
 ];
 
 let randomOrd;
+
+// variabler til at holde styr på hvor mange forsøg spillerne har grigt i hvor mange de har i alt
 let forsøg = 0;
 let maxForsøg = 5;
 
