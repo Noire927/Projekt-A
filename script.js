@@ -23,11 +23,11 @@ const ord = [
 
 let randomOrd;
 
-// variabler til at holde styr på hvor mange forsøg spillerne har grigt i hvor mange de har i alt
+// variabler til at holde styr på hvor mange forsøg spillerne har brugt og hvor mange de har i alt
 let forsøg = 0;
 let maxForsøg = 5;
 
-// starter et nyt spil og blander det valgte ord
+// starter et nyt spil og blander det valgte ord, køres når siden loades og ved reset / gennemført spil
 function startGame() {
   console.log("ord-array:", ord);
 
@@ -82,16 +82,16 @@ guessButton.addEventListener("click", () => {
     correctWord.textContent = `Rigtigt! Forsøg brugt ${forsøg}`;
     endGame();
   } else if (forsøg >= maxForsøg) {
-    correctWord.textContent = `Du løb tør for forsøg! Ordet var: ${randomOrd}`;
+    correctWord.textContent = `Ikke flere forsøg, ordet var: ${randomOrd}`;
     endGame();
   } else {
-    correctWord.textContent = "Forkert! Prøv igen.";
+    correctWord.textContent = "Forkert. Prøv igen.";
   }
 });
 
 // spilleren giver op
 giveUp.addEventListener("click", () => {
-  correctWord.textContent = `Du gav op! Ordet var: ${randomOrd}`;
+  correctWord.textContent = `Du gav op. Ordet var: ${randomOrd}`;
 
   endGame();
 });
